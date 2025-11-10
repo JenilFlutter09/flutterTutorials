@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
+
 class ListviewExample extends StatelessWidget {
   const ListviewExample({super.key});
 
@@ -11,7 +13,7 @@ class ListviewExample extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(
           'ListView Example',
@@ -24,23 +26,34 @@ class ListviewExample extends StatelessWidget {
         height: screenHeight,
         width: screenWidth,
         padding: EdgeInsets.all(10),
-        child: ListView.builder(
-            itemCount: 100,
-            itemBuilder: (context,index){
-              return Container(
-                height: 100,
-                alignment: Alignment.center,
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color:  getRandomColor(),
-                ),
-                child: Text('List Item Count = $index', style: TextStyle(color: Colors.white,fontSize: 30),),
-              );
-            }),
+        /*child: StaggeredGridView.count(
+        crossAxisCount: 4,
+        staggeredTiles: const [
+          StaggeredTile.count(2, 2),
+          StaggeredTile.count(1, 2),
+          StaggeredTile.count(1, 1),
+          StaggeredTile.count(1, 2),
+          StaggeredTile.count(2, 1),
+          StaggeredTile.count(1, 1),
+        ],
+        children: List.generate(6, (index) => Card(
+          color: Colors.blue.shade100,
+          child: Center(child: Text('Item $index')),
+        )),
+      ),*/
+        child: StaggeredGridView.builder(
+          gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            staggeredTileBuilder: (index) => StaggeredTile.count(
+            (index % 3) + 1, (index % 5) + 1)),
+          itemBuilder: (context, index) {
+            return Container(color: getRandomColor());
+          },
+        ),
       ),
     );
   }
+
   Color getRandomColor() {
     final Random _random = Random();
     return Color.fromARGB(

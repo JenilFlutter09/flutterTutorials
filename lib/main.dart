@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorials/topicsToCover/navigation.dart';
 
 import 'homeScreen.dart';
 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: Homescreen()
+      home: Homescreen(),
+      routes: {
+        '/setStateExample': (context) => const setStateExample(),
+      },
     );
   }
 }

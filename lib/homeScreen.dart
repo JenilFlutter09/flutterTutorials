@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertutorials/topicsToCover/navigation.dart';
+import 'package:fluttertutorials/topicsToCover/stackExample.dart';
 
 import 'listExample.dart';
 import 'responsiveness.dart';
@@ -18,7 +20,7 @@ class Homescreen extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
-    final topics = ['ListView','Gridview', 'tryPage', 'listExample'];
+    final topics = ['ListView','Gridview', 'tryPage', 'listExample', 'stackExample','Navigation'];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,10 +54,20 @@ class Homescreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => GridviewExample()),
                 );
-              }else{
+              }else if(index == 3){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => listExample()),
+                );
+              }else if(index == 4){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => stackExample()),
+                );
+              }else if(index == 5){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => navigationExample()),
                 );
               }
             },
