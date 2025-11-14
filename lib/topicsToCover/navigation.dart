@@ -158,65 +158,81 @@ class _setStateExampleState extends State<setStateExample> {
             ElevatedButton(onPressed: () {
               print(email.text);
             }, child: Text('Login')),
-            /* Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextFormField(
-                      controller: user_email,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        prefixIcon: Icon(Icons.person),
-                        hintText: 'User Email',
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please enter Email';
-                        }else if(!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)){
-                          return 'Enter a valid email';
-                        }else{
-                          return null;
-                        }
-                      },
-                      autovalidateMode: AutovalidateMode.onUnfocus,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextFormField(
-                      controller: user_password,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      obscuringCharacter: '*',
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        prefixIcon: Icon(Icons.person),
-
-                        hintText: 'Password',
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please enter Email';
-                        }else  if (value.length < 6) {
-                          return 'Password must be at least 6 characters';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),*/
+             //formExample(formKey: _formKey),
           ],
         ),
       ),
     );
   }
 }
+
+/*
+class formExample extends StatelessWidget {
+  const formExample({
+    super.key,
+    required GlobalKey<FormState> formKey,
+  }) : _formKey = formKey;
+
+  final GlobalKey<FormState> _formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+     key: _formKey,
+     child: Column(
+       children: [
+         Padding(
+           padding: const EdgeInsets.all(10),
+           child: TextFormField(
+             controller: email,
+             keyboardType: TextInputType.emailAddress,
+             decoration: InputDecoration(
+               border: OutlineInputBorder(
+                 borderSide: BorderSide(color: Colors.blue),
+               ),
+               prefixIcon: Icon(Icons.person),
+               hintText: 'User Email',
+             ),
+             validator: (value){
+               if(value == null || value.isEmpty){
+                 return 'Please enter Email';
+               }else if(!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)){
+                 return 'Enter a valid email';
+               }else{
+                 return null;
+               }
+             },
+             autovalidateMode: AutovalidateMode.onUnfocus,
+           ),
+         ),
+         Padding(
+           padding: const EdgeInsets.all(10),
+           child: TextFormField(
+             controller: user_password,
+             keyboardType: TextInputType.emailAddress,
+             obscureText: true,
+             obscuringCharacter: '*',
+             decoration: InputDecoration(
+               border: OutlineInputBorder(
+                 borderSide: BorderSide(color: Colors.blue),
+               ),
+               prefixIcon: Icon(Icons.person),
+
+               hintText: 'Password',
+             ),
+             validator: (value){
+               if(value == null || value.isEmpty){
+                 return 'Please enter Email';
+               }else  if (value.length < 6) {
+                 return 'Password must be at least 6 characters';
+               }
+               return null;
+             },
+           ),
+         ),
+       ],
+     ),
+                );
+  }
+}
+*/
