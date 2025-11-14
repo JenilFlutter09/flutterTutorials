@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
+import 'package:fluttertutorials/topicsToCover/signup.dart';
 
 import 'homeScreen.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: Homescreen(),
       routes: {
         '/setStateExample': (context) => const setStateExample(),
+        '/Password': (context) => SignIn(),
       },
     );
   }

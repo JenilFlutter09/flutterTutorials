@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertutorials/topicsToCover/formExample.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
 import 'package:fluttertutorials/topicsToCover/passingData.dart';
+import 'package:fluttertutorials/topicsToCover/signup.dart';
 import 'package:fluttertutorials/topicsToCover/stackExample.dart';
+import 'package:fluttertutorials/topicsToCover/switchRadioCheckBox.dart';
 
 import 'listExample.dart';
 import 'responsiveness.dart';
@@ -22,7 +24,7 @@ class Homescreen extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
-    final topics = ['ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example'];
+    final topics = ['ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example','srcExample','SignUp'];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -76,6 +78,13 @@ class Homescreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => formExample()),
                 );
+              }else if(index == 7){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => srcExample()),
+                );
+              }else if(index == 8){
+                Navigator.pushNamed(context, '/Password', arguments: 'password');
               }
             },
             child: Container(
