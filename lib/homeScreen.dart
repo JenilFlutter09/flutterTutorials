@@ -3,11 +3,14 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertutorials/topicsToCover/formExample.dart';
+import 'package:fluttertutorials/topicsToCover/getXStateManagement.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
 import 'package:fluttertutorials/topicsToCover/passingData.dart';
 import 'package:fluttertutorials/topicsToCover/signup.dart';
 import 'package:fluttertutorials/topicsToCover/stackExample.dart';
 import 'package:fluttertutorials/topicsToCover/switchRadioCheckBox.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'listExample.dart';
 import 'responsiveness.dart';
@@ -24,7 +27,7 @@ class Homescreen extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
-    final topics = ['ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example','srcExample','SignUp'];
+    final topics = ['GetXExample','ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example','srcExample','SignUp'];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -44,10 +47,11 @@ class Homescreen extends StatelessWidget {
           return InkWell(
             onTap: (){
               if(index == 0){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ListviewExample()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => ListviewExample()),
+                // );
+                Get.to(()=>getExample());
               }else if(index == 2){
                 Navigator.push(
                   context,

@@ -546,3 +546,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
+class definedColors {
+  static Color liked = Colors.red;
+}

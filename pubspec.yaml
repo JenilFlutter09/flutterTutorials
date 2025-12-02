@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   staggered_grid_view:
   svg_image: ^0.0.1
-
+  get:
 dev_dependencies:
   flutter_test:
     sdk: flutter
