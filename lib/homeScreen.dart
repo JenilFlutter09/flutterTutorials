@@ -9,6 +9,7 @@ import 'package:fluttertutorials/topicsToCover/passingData.dart';
 import 'package:fluttertutorials/topicsToCover/signup.dart';
 import 'package:fluttertutorials/topicsToCover/stackExample.dart';
 import 'package:fluttertutorials/topicsToCover/switchRadioCheckBox.dart';
+import 'package:fluttertutorials/topicsToCover/toDoGetXExample.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -51,7 +52,7 @@ class Homescreen extends StatelessWidget {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => ListviewExample()),
                 // );
-                Get.to(()=>getExample());
+                Get.to(()=>todoExample());
               }else if(index == 2){
                 Navigator.push(
                   context,
