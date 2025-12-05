@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertutorials/topicsToCover/formExample.dart';
 import 'package:fluttertutorials/topicsToCover/getXStateManagement.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
+import 'package:fluttertutorials/topicsToCover/onintiExample.dart';
 import 'package:fluttertutorials/topicsToCover/passingData.dart';
 import 'package:fluttertutorials/topicsToCover/signup.dart';
 import 'package:fluttertutorials/topicsToCover/stackExample.dart';
@@ -52,7 +53,7 @@ class Homescreen extends StatelessWidget {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => ListviewExample()),
                 // );
-                Get.to(()=>todoExample());
+                Get.to(()=>onInitExample());
               }else if(index == 2){
                 Navigator.push(
                   context,

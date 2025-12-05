@@ -649,6 +649,22 @@ class todoController extends GetxController {
   String currentDate = "";
   String currentTime = "";
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    /// api get
+    /// one
+    /// two
+    /// three
+    /// initialization of data
+  }
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+  }
+
   void getDateTime() {
     DateTime now = DateTime.now();
     currentDate = "${now.day} -${now.month}-${now.year}";
