@@ -14,6 +14,7 @@ import 'package:fluttertutorials/topicsToCover/toDoGetXExample.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import 'apiExample/view/homePage.dart';
 import 'listExample.dart';
 import 'responsiveness.dart';
 import 'topicsToCover/gridView.dart';
@@ -53,7 +54,7 @@ class Homescreen extends StatelessWidget {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => ListviewExample()),
                 // );
-                Get.to(()=>onInitExample());
+                Get.to(()=>HomePage());
               }else if(index == 2){
                 Navigator.push(
                   context,
