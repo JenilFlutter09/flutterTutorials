@@ -56,10 +56,10 @@ class HomePage extends StatelessWidget {
           );
         }),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async => await controller.addNewProduct(),
-      //   child: Icon(Icons.add_circle),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async => await controller.addNewProduct(),
+        child: Icon(Icons.add_circle),
+      ),
      // bottomNavigationBar: BottomNav,
     );
   }
@@ -100,6 +100,15 @@ class customCard extends StatelessWidget {
               onPressed: () async =>
                   await controller.deleteProduct(product.id ?? 1),
               icon: Icon(Icons.delete),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            child: IconButton(
+              onPressed: () async =>
+                  await controller.locallySaveId(product.id ?? 101),
+              icon: Icon(Icons.save),
             ),
           ),
         ],
