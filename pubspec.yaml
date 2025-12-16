@@ -40,6 +40,8 @@ dependencies:
   http:
   shared_preferences:
   flutter_secure_storage:
+  firebase_core: ^2.27.0
+  cloud_firestore: ^4.15.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

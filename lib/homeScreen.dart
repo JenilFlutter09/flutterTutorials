@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertutorials/firebase/firebaseView.dart';
 import 'package:fluttertutorials/topicsToCover/formExample.dart';
 import 'package:fluttertutorials/topicsToCover/getXStateManagement.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
@@ -30,7 +31,7 @@ class Homescreen extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
-    final topics = ['GetXExample','ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example','srcExample','SignUp'];
+    final topics = ['FireBase','ListView','Gridview', 'tryPage', 'listExample', 'stackExample','navigateOne','Form Example','srcExample','SignUp'];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -54,7 +55,7 @@ class Homescreen extends StatelessWidget {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => ListviewExample()),
                 // );
-                Get.to(()=>HomePage());
+                Get.to(()=>FirebaseView());
               }else if(index == 2){
                 Navigator.push(
                   context,

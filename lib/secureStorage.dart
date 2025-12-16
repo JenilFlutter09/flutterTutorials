@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'apiExample/model/productModel.dart';
 /// Token
 class SecureStorageHelper {
   SecureStorageHelper._();
-  static final SecureStorageHelper instance = SecureStorageHelper._();
+  //static final SecureStorageHelper instance = SecureStorageHelper._();
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
@@ -68,3 +70,27 @@ class SecureStorageHelper {
     await _storage.deleteAll();
   }
 }
+
+class secureStorageHelp{
+
+  final FlutterSecureStorage sinstance = const FlutterSecureStorage();
+  static String tokenKey = 'token';
+
+  /// Encode will convert Object to String
+  Future<void> setToken(Products value) async {
+    var data = jsonEncode(value);
+    await sinstance.write(key: tokenKey, value: data);
+  }
+  /// Decode will convert String to Object
+  Future<Products?> getToken () async {
+    var data = await sinstance.read(key: tokenKey);
+    return jsonDecode(data!);
+  }
+
+  Future<void> deleteToken() async {
+   // await sinstance.delete(key: tokenKey);
+    await sinstance.deleteAll();
+  }
+
+}
+

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "273275159796",
+    "project_id": "testingproject-db7ee",
+    "storage_bucket": "testingproject-db7ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273275159796:android:5bf4f7d6bfb13720370aa1",
+        "android_client_info": {
+          "package_name": "com.example.fluttertutorials"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8zfcQVVKyYRMylUuWnI61bsEOwb65hT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

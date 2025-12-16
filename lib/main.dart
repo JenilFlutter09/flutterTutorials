@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertutorials/topicsToCover/navigation.dart';
 import 'package:fluttertutorials/topicsToCover/signup.dart';
 import 'package:get/get.dart';
 
+import 'firebase_options.dart';
 import 'homeScreen.dart';
 
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
