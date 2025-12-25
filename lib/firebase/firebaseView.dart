@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertutorials/firebase/models/categoryModel.dart';
 import 'package:get/get.dart';
 
 import 'firebaseCustomClass.dart';
@@ -44,9 +45,10 @@ class FirebaseView extends StatelessWidget {
 
         return ListView.builder(
           padding: const EdgeInsets.all(12),
-          itemCount: controller.users.length,
+         // itemCount: controller.users.length,
+          itemCount: controller.loginusers.length,
           itemBuilder: (context, index) {
-            final user = controller.users[index];
+            final user = controller.loginusers[index];
 
             return Card(
               elevation: 4,
@@ -60,7 +62,7 @@ class FirebaseView extends StatelessWidget {
                   radius: 24,
                   backgroundColor: Colors.blue.shade100,
                   child: Text(
-                    user.name[0].toUpperCase(),
+                    user.email?[0].toUpperCase() ?? '',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -69,7 +71,7 @@ class FirebaseView extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  user.name,
+                  user.email ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -78,14 +80,14 @@ class FirebaseView extends StatelessWidget {
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    "${user.email}\nAge: ${user.age}",
+                    "${user.email}",
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                 ),
                 isThreeLine: true,
                 trailing: IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
-                  onPressed: () => controller.deleteUser(user.id),
+                  onPressed: () => controller.deleteLoginUser(user.id!),
                 ),
               ),
             );
@@ -104,8 +106,7 @@ class FirebaseView extends StatelessWidget {
   // ---------------- ADD USER DIALOG ----------------
 
   void showAddUserDialog(BuildContext context) {
-    final nameController = TextEditingController();
-    final ageController = TextEditingController();
+    final passController = TextEditingController();
     final emailController = TextEditingController();
 
     Get.dialog(
@@ -126,28 +127,6 @@ class FirebaseView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: "Name",
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              TextField(
-                controller: ageController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: "Age",
-                  prefixIcon: Icon(Icons.cake),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 12),
-
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -157,6 +136,16 @@ class FirebaseView extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: passController,
+                decoration: const InputDecoration(
+                  labelText: "Password",
+                  prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
 
               const SizedBox(height: 20),
 
@@ -172,8 +161,7 @@ class FirebaseView extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        if (nameController.text.isEmpty ||
-                            ageController.text.isEmpty ||
+                        if (passController.text.isEmpty ||
                             emailController.text.isEmpty) {
                           Get.snackbar(
                             "Error",
@@ -182,12 +170,12 @@ class FirebaseView extends StatelessWidget {
                           );
                           return;
                         }
-
-                        controller.addUser(
-                          name: nameController.text.trim(),
-                          age: int.parse(ageController.text.trim()),
-                          email: emailController.text.trim(),
-                        );
+                        controller.addLoginUser(password: passController.text.trim(), email: emailController.text.trim());
+                        // controller.addUser(
+                        //   name: passController.text.trim(),
+                        //   age: int.parse(ageController.text.trim()),
+                        //   email: emailController.text.trim(),
+                        // );
 
                         Get.back();
                       },
@@ -207,13 +195,15 @@ class FirebaseView extends StatelessWidget {
 
 class FirebaseController extends GetxController {
   final FirestoreService service = FirestoreService();
-
+  final firebaseHelper fbasehelper = firebaseHelper();
   final users = <UserModel>[].obs;
+  final loginusers = <newModelClass>[].obs;
   final isLoading = false.obs;
 
   @override
   void onInit() {
     fetchUsers();
+    fetchLoginUsers();
     super.onInit();
   }
 
@@ -241,10 +231,36 @@ class FirebaseController extends GetxController {
     users.value = await service.getUsers();
     isLoading.value = false;
   }
+  /// CREATE
+  Future<void> addLoginUser({
+    required String password,
+    required String email,
+  }) async {
+    await fbasehelper.addUser(
+      newModelClass(
+        id: '',
+        email: email,
+        password: password
+      ),
+    );
+
+    fetchLoginUsers();
+  }
+
+  /// READ
+  Future<void> fetchLoginUsers() async {
+    isLoading.value = true;
+    loginusers.value = await fbasehelper.fetchUsers();
+    isLoading.value = false;
+  }
 
   /// DELETE
   Future<void> deleteUser(String id) async {
     await service.deleteUser(id);
     fetchUsers();
+  } /// DELETE
+  Future<void> deleteLoginUser(String id) async {
+    await fbasehelper.deleteLoginUser(id);
+    fetchLoginUsers();
   }
 }

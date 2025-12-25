@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'models/cartModel.dart';
+import 'models/categoryModel.dart';
+import 'models/productModel.dart';
+
 
 /*
 STEPS FOR FIREBASE
@@ -81,6 +85,31 @@ class UserModel {
   }
 }
 
+
+class firebaseHelper{
+
+  final FirebaseFirestore dbInstance = FirebaseFirestore.instance;
+  static String userString = 'users';
+  static String loginString = 'login';
+  CollectionReference get userCollectionReference => dbInstance.collection(userString);
+  CollectionReference get loginCollectionReference => dbInstance.collection(loginString);
+
+  Future<void> addUser(newModelClass user)async {
+    await loginCollectionReference.add(user.toMap());
+  }
+
+  Future<List<newModelClass>> fetchUsers() async {
+    final data = await loginCollectionReference.get();
+    return data.docs.map((doc) => newModelClass.fromDoc(doc)).toList();
+  }
+
+  /// DELETE (optional but good)
+  Future<void> deleteLoginUser(String id) async {
+    await loginCollectionReference.doc(id).delete();
+  }
+
+}
+
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -102,5 +131,73 @@ class FirestoreService {
   /// DELETE (optional but good)
   Future<void> deleteUser(String id) async {
     await users.doc(id).delete();
+  }
+
+
+  /// ---------------- Categories ----------------
+  CollectionReference get categories => _db.collection('categories');
+
+  /// CREATE CATEGORY
+  Future<void> addCategory(CategoryModel category) async {
+    await categories.add(category.toMap());
+  }
+  Future<List<CategoryModel>> getCategories() async {
+    final snapshot = await categories.get();
+    return snapshot.docs
+        .map((doc) => CategoryModel.fromDoc(doc))
+        .toList();
+  }
+  /// DELETE CATEGORY
+  Future<void> deleteCategory(String id) async {
+    await categories.doc(id).delete();
+  }
+
+  /// ---------------- Products ----------------
+  CollectionReference get products => _db.collection('products');
+  /// CREATE PRODUCT
+  Future<void> addProduct(ProductModel product) async {
+    await products.add(product.toMap());
+  }
+  /// READ ALL PRODUCTS
+  Future<List<ProductModel>> getAllProducts() async {
+    final snapshot = await products
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    return snapshot.docs
+        .map((doc) => ProductModel.fromDoc(doc))
+        .toList();
+  }
+  Future<List<ProductModel>> getProductsByCategory(String categoryId) async {
+    final snapshot = await products
+        .where('categoryId', isEqualTo: categoryId)
+        .get();
+
+    return snapshot.docs
+        .map((doc) => ProductModel.fromDoc(doc))
+        .toList();
+  }
+  /// DELETE PRODUCT
+  Future<void> deleteProduct(String id) async {
+    await products.doc(id).delete();
+  }
+
+  /// ---------------- Cart ----------------
+  CollectionReference cart(String userId) =>
+      _db.collection('cart').doc(userId).collection('items');
+
+  Future<void> addToCart(String userId, CartItemModel item) async {
+    await cart(userId).doc(item.productId).set(item.toMap());
+  }
+
+  // Future<List<CartItemModel>> getCartItems(String userId) async {
+  //   final snapshot = await cart(userId).get();
+  //   return snapshot.docs
+  //       .map((doc) => CartItemModel.fromMap(doc.data()))
+  //       .toList();
+  // }
+
+  Future<void> deleteCartItem(String userId, String productId) async {
+    await cart(userId).doc(productId).delete();
   }
 }

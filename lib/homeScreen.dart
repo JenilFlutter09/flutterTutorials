@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import 'apiExample/view/homePage.dart';
+import 'firebase/views/homeView.dart';
 import 'listExample.dart';
 import 'responsiveness.dart';
 import 'topicsToCover/gridView.dart';
